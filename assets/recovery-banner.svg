@@ -1,0 +1,82 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" role="img" aria-labelledby="title desc">
+  <title id="title">Let's begin the fast recovery journey together</title>
+  <desc id="desc">Promotional healthcare banner with bold red lettering, a transition care center building, and social icons.</desc>
+  <defs>
+    <linearGradient id="buildingShade" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0%" stop-color="#fefefe"/>
+      <stop offset="100%" stop-color="#dfe6ef"/>
+    </linearGradient>
+    <linearGradient id="glassShade" x1="0" x2="0" y1="0" y2="1">
+      <stop offset="0%" stop-color="#c7d9f7"/>
+      <stop offset="100%" stop-color="#8da9d7"/>
+    </linearGradient>
+    <filter id="softShadow" x="-20%" y="-20%" width="140%" height="160%">
+      <feDropShadow dx="0" dy="14" stdDeviation="18" flood-color="#9aa8b3" flood-opacity="0.28"/>
+    </filter>
+  </defs>
+
+  <rect width="1600" height="900" fill="#f2eee5"/>
+
+  <g fill="#d70018" font-family="Arial, Helvetica, sans-serif" font-size="150" font-weight="700" letter-spacing="-4">
+    <text x="142" y="120">LET’S BEGIN THE</text>
+    <text x="136" y="258">FAST RECOVERY</text>
+    <text x="32" y="396">JOURNEY TOGETHER</text>
+  </g>
+
+  <g transform="translate(250 380)" filter="url(#softShadow)">
+    <polygon points="0,350 154,246 154,520 0,520" fill="url(#glassShade)"/>
+    <polygon points="154,235 315,92 315,520 154,520" fill="url(#buildingShade)"/>
+    <polygon points="315,122 590,220 590,520 315,520" fill="#f7f8fb"/>
+    <polygon points="210,120 315,40 315,92 154,235" fill="#d3dde8"/>
+    <rect x="40" y="280" width="80" height="28" rx="2" fill="#b6c7e0"/>
+    <rect x="40" y="325" width="80" height="28" rx="2" fill="#b6c7e0"/>
+    <rect x="40" y="370" width="80" height="28" rx="2" fill="#b6c7e0"/>
+    <rect x="40" y="415" width="80" height="28" rx="2" fill="#b6c7e0"/>
+
+    <g fill="#eff3f8">
+      <rect x="362" y="220" width="44" height="38" rx="4"/>
+      <rect x="428" y="220" width="44" height="38" rx="4"/>
+      <rect x="494" y="220" width="44" height="38" rx="4"/>
+      <rect x="362" y="285" width="44" height="38" rx="4"/>
+      <rect x="428" y="285" width="44" height="38" rx="4"/>
+      <rect x="494" y="285" width="44" height="38" rx="4"/>
+      <rect x="362" y="350" width="44" height="38" rx="4"/>
+      <rect x="428" y="350" width="44" height="38" rx="4"/>
+      <rect x="494" y="350" width="44" height="38" rx="4"/>
+      <rect x="362" y="415" width="44" height="38" rx="4"/>
+      <rect x="428" y="415" width="44" height="38" rx="4"/>
+      <rect x="494" y="415" width="44" height="38" rx="4"/>
+    </g>
+
+    <g fill="#4d4d4d">
+      <circle cx="372" cy="196" r="8"/>
+      <circle cx="432" cy="196" r="8"/>
+      <circle cx="492" cy="196" r="8"/>
+      <circle cx="552" cy="196" r="8"/>
+    </g>
+
+    <g transform="translate(240 292)">
+      <polygon points="0,0 158,0 142,120 16,120" fill="#ffffff"/>
+      <polygon points="142,0 232,0 214,120 126,120" fill="#f8f0ff"/>
+      <rect x="26" y="32" width="168" height="56" rx="5" fill="#ffffff"/>
+      <text x="34" y="70" fill="#2a3350" font-family="Arial, Helvetica, sans-serif" font-size="29" font-weight="700">HCAH</text>
+      <text x="128" y="58" fill="#7d2f7e" font-family="Arial, Helvetica, sans-serif" font-size="15" font-weight="700">TRANSITION</text>
+      <text x="128" y="76" fill="#7d2f7e" font-family="Arial, Helvetica, sans-serif" font-size="15" font-weight="700">CARE CENTER</text>
+      <text x="34" y="98" fill="#525c66" font-family="Arial, Helvetica, sans-serif" font-size="11" font-weight="700">YOUR EXPERT RECOVERY &amp; CARE PARTNER</text>
+    </g>
+
+    <rect x="300" y="520" width="10" height="160" fill="#424242"/>
+    <rect x="494" y="520" width="10" height="160" fill="#424242"/>
+  </g>
+
+  <g transform="translate(1310 812)" fill="#1d1d1d" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="700">
+    <circle cx="0" cy="0" r="22"/>
+    <circle cx="50" cy="0" r="22"/>
+    <circle cx="100" cy="0" r="22"/>
+    <circle cx="150" cy="0" r="22"/>
+    <text x="-6" y="7" fill="#ffffff">f</text>
+    <text x="44" y="7" fill="#ffffff">in</text>
+    <text x="94" y="7" fill="#ffffff">▶</text>
+    <text x="142" y="7" fill="#ffffff">◎</text>
+  </g>
+</svg>

@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Clinical Editorial Healthcare | Recovery Journey</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;family=Inter:wght@400;500;600&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "surface": "#fcf9f1",
+                      "surface-container-lowest": "#ffffff",
+                      "on-error-container": "#93000a",
+                      "on-surface-variant": "#5d3f3b",
+                      "surface-variant": "#e5e2da",
+                      "outline": "#926f6a",
+                      "on-error": "#ffffff",
+                      "tertiary": "#004fa5",
+                      "surface-bright": "#fcf9f1",
+                      "on-primary-fixed-variant": "#930006",
+                      "on-primary": "#ffffff",
+                      "on-secondary-container": "#646464",
+                      "on-tertiary": "#ffffff",
+                      "inverse-surface": "#31312b",
+                      "primary-fixed-dim": "#ffb4aa",
+                      "on-primary-container": "#ffe5e1",
+                      "secondary": "#5e5e5e",
+                      "surface-container-high": "#ebe8e0",
+                      "inverse-on-surface": "#f4f0e8",
+                      "primary-fixed": "#ffdad5",
+                      "on-secondary": "#ffffff",
+                      "primary-container": "#d30f13",
+                      "inverse-primary": "#ffb4aa",
+                      "surface-container-highest": "#e5e2da",
+                      "surface-tint": "#c0000b",
+                      "on-tertiary-fixed-variant": "#004491",
+                      "on-tertiary-container": "#e3eaff",
+                      "error": "#ba1a1a",
+                      "on-secondary-fixed": "#1b1b1b",
+                      "secondary-fixed-dim": "#c6c6c6",
+                      "on-secondary-fixed-variant": "#474747",
+                      "tertiary-fixed": "#d7e2ff",
+                      "on-background": "#1c1c17",
+                      "surface-container-low": "#f6f3eb",
+                      "surface-dim": "#dddad2",
+                      "on-surface": "#1c1c17",
+                      "outline-variant": "#e7bdb7",
+                      "tertiary-container": "#0066d3",
+                      "on-primary-fixed": "#410001",
+                      "secondary-fixed": "#e2e2e2",
+                      "primary": "#a70008",
+                      "error-container": "#ffdad6",
+                      "surface-container": "#f1eee6",
+                      "background": "#fcf9f1",
+                      "secondary-container": "#e2e2e2",
+                      "tertiary-fixed-dim": "#acc7ff",
+                      "on-tertiary-fixed": "#001a40"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.125rem",
+                      "lg": "0.25rem",
+                      "xl": "0.5rem",
+                      "full": "0.75rem"
+              },
+              "fontFamily": {
+                      "headline": ["Plus Jakarta Sans"],
+                      "body": ["Inter"],
+                      "label": ["Inter"]
+              }
+            },
+          },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        :root {
+            --ease-smooth: cubic-bezier(0.22, 1, 0.36, 1);
+        }
+        .text-wall {
+            line-height: 0.9;
+            letter-spacing: -0.04em;
+            opacity: 0;
+            clip-path: inset(0 100% 0 0);
+            transform: translateX(-40px);
+            animation: hero-wipe-in 1.5s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+        }
+
+        #hospitalexterior
+        {
+            position: relative;
+            top: -20px;
+            transform: translateY(40px) scale(0.96);
+            opacity: 0;
+            animation: hero-image-reveal 1.2s var(--ease-smooth) 0.2s forwards;
+        }
+
+        .hero-shell::before {
+            content: "";
+            position: absolute;
+            inset: -8% auto auto 50%;
+            width: min(72vw, 680px);
+            height: min(72vw, 680px);
+            transform: translateX(-50%);
+            background:
+                radial-gradient(circle, rgba(167, 0, 8, 0.16) 0%, rgba(167, 0, 8, 0.04) 36%, rgba(167, 0, 8, 0) 72%);
+            filter: blur(8px);
+            animation: halo-pulse 8s ease-in-out infinite;
+            pointer-events: none;
+        }
+
+        .hero-shell::after {
+            content: "";
+            position: absolute;
+            inset: 18% 8% auto auto;
+            width: 180px;
+            height: 180px;
+            border-radius: 999px;
+            background: linear-gradient(135deg, rgba(0, 102, 211, 0.12), rgba(255, 255, 255, 0));
+            filter: blur(2px);
+            animation: drift-orb 10s ease-in-out infinite;
+            pointer-events: none;
+        }
+
+        .hero-image-wrap::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(120deg, transparent 0%, rgba(255, 255, 255, 0.3) 30%, transparent 58%);
+            transform: translateX(-130%);
+            animation: image-sheen 5.5s ease-in-out 1.4s infinite;
+            pointer-events: none;
+        }
+
+        .floating-badge {
+            opacity: 0;
+            transform: translateY(32px);
+            animation:
+                badge-rise 1s var(--ease-smooth) 0.75s forwards,
+                badge-float 5.5s ease-in-out 1.9s infinite;
+        }
+
+        .stat-card {
+            position: relative;
+        }
+
+        .stat-card::after {
+            content: "";
+            position: absolute;
+            left: 0;
+            bottom: -14px;
+            width: 72px;
+            height: 4px;
+            border-radius: 999px;
+            background: linear-gradient(90deg, rgba(167, 0, 8, 0.9), rgba(167, 0, 8, 0.15));
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.8s var(--ease-smooth);
+        }
+
+        .reveal {
+            opacity: 0;
+            transform: translateY(46px);
+            transition:
+                opacity 0.9s var(--ease-smooth),
+                transform 0.9s var(--ease-smooth);
+        }
+
+        .reveal.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .reveal.is-visible.stat-card::after {
+            transform: scaleX(1);
+        }
+
+        .nav-link {
+            position: relative;
+        }
+
+        .nav-link::after {
+            content: "";
+            position: absolute;
+            left: 0;
+            bottom: -6px;
+            width: 100%;
+            height: 2px;
+            background: currentColor;
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.35s ease;
+            opacity: 0.8;
+        }
+
+        .nav-link:hover::after {
+            transform: scaleX(1);
+        }
+
+        .social-float a {
+            animation: social-bob 6s ease-in-out infinite;
+        }
+
+        .social-float a:nth-child(2) {
+            animation-delay: 1s;
+        }
+
+        .social-float a:nth-child(3) {
+            animation-delay: 2s;
+        }
+
+        .btn-shine-effect {
+            position: relative;
+            overflow: hidden;
+            transition: all 0.4s ease;
+        }
+        
+        .btn-shine-effect::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 50%;
+            height: 100%;
+            background: linear-gradient(to right, rgba(255,255,255,0) 0%, rgba(255,255,255,0.4) 50%, rgba(255,255,255,0) 100%);
+            transform: skewX(-20deg);
+            z-index: 1;
+        }
+        
+        .btn-shine-effect:hover::before {
+            animation: button-shine 1.2s ease-in-out;
+        }
+
+        .btn-shine-effect span {
+            position: relative;
+            z-index: 2;
+        }
+
+        @keyframes button-shine {
+            0% {
+                left: -100%;
+            }
+            100% {
+                left: 200%;
+            }
+        }
+
+        @keyframes hero-wipe-in {
+            0% {
+                opacity: 0;
+                clip-path: inset(0 100% 0 0);
+                transform: translateX(-40px);
+            }
+            100% {
+                opacity: 1;
+                clip-path: inset(0 0% 0 0);
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes hero-rise {
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        @keyframes hero-image-reveal {
+            0% {
+                opacity: 0;
+                transform: translateY(40px) scale(0.96);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        @keyframes halo-pulse {
+            0%, 100% {
+                opacity: 0.65;
+                transform: translateX(-50%) scale(0.94);
+            }
+            50% {
+                opacity: 1;
+                transform: translateX(-50%) scale(1.06);
+            }
+        }
+
+        @keyframes drift-orb {
+            0%, 100% {
+                transform: translate3d(0, 0, 0) scale(1);
+            }
+            50% {
+                transform: translate3d(-18px, 20px, 0) scale(1.08);
+            }
+        }
+
+        @keyframes image-sheen {
+            0%, 70%, 100% {
+                transform: translateX(-130%);
+            }
+            85% {
+                transform: translateX(130%);
+            }
+        }
+
+        @keyframes badge-rise {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes badge-float {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-12px);
+            }
+        }
+
+        @keyframes social-bob {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-8px);
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            *,
+            *::before,
+            *::after {
+                animation: none !important;
+                transition: none !important;
+                scroll-behavior: auto !important;
+            }
+
+            .text-wall,
+            #hospitalexterior,
+            .floating-badge,
+            .reveal {
+                opacity: 1 !important;
+                transform: none !important;
+            }
+        }
+    </style>
+</head>
+<body class="bg-[#EEEBE3] text-on-surface font-body overflow-x-hidden">
+<!-- Top Navigation Bar -->
+<nav class="fixed top-0 w-full z-50 bg-[#fcf9f1] dark:bg-[#1c1c17] backdrop-blur-md bg-opacity-80 transition-colors duration-300">
+<div class="flex justify-between items-center px-12 py-6 max-w-[1920px] mx-auto">
+<!-- Brand Identity -->
+<div class="flex items-center gap-4">
+<img alt="Clinical Editorial Healthcare Logo" class="h-10 w-auto" data-alt="Sophisticated minimalist healthcare logo with a stylized cross icon in deep red and professional typography" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB6HeGMOZlp_Y_4DKB_F16koOgoB8mkuffWXs5oPO-G_U4s4y0S3ZW0u_M6DIkHk5Uk1u4L2UTSRHemqW2Vrlp5nLfrOtG1QVgXdIrX_6in_M0EQQLhjKTT4BOTqRJUiyVyghrYmVr2k9mNDLYnFC-S1X3aEdMjy4nA-RF1ath4JIcGn1bGXbq95suWaw2q5Y6CxkBXGotlZ2UAOQzAe7isN4FwulRLk6vyacvr5YiLNltyRY0vjRz2ljjACdKR5frJjq8UD-_Deij3"/>
+<span class="text-2xl font-black text-[#a70008] dark:text-[#ffb4ab] font-headline tracking-tight">Clinical Editorial Healthcare</span>
+</div>
+<!-- Navigation Links -->
+<div class="hidden md:flex items-center space-x-8">
+<a class="nav-link text-[#5e5e5e] dark:text-[#938f99] font-medium hover:text-[#a70008] dark:hover:text-[#ffb4ab] transition-all font-headline tracking-tight" href="#">REHAB &amp; RECOVERY</a>
+<a class="nav-link text-[#5e5e5e] dark:text-[#938f99] font-medium hover:text-[#a70008] dark:hover:text-[#ffb4ab] transition-all font-headline tracking-tight" href="#">ELDER CARE</a>
+<a class="nav-link text-[#5e5e5e] dark:text-[#938f99] font-medium hover:text-[#a70008] dark:hover:text-[#ffb4ab] transition-all font-headline tracking-tight" href="#">HOME CARE</a>
+<a class="nav-link text-[#5e5e5e] dark:text-[#938f99] font-medium hover:text-[#a70008] dark:hover:text-[#ffb4ab] transition-all font-headline tracking-tight" href="#">PAIN RELIEF</a>
+<a class="nav-link text-[#5e5e5e] dark:text-[#938f99] font-medium hover:text-[#a70008] dark:hover:text-[#ffb4ab] transition-all font-headline tracking-tight" href="#">OUR CENTRES</a>
+<a class="nav-link text-[#5e5e5e] dark:text-[#938f99] font-medium hover:text-[#a70008] dark:hover:text-[#ffb4ab] transition-all font-headline tracking-tight" href="#">COMPANY</a>
+</div>
+<!-- Search & Action Cluster -->
+<div class="flex items-center gap-4">
+<div class="relative flex items-center">
+<input class="bg-transparent border border-outline-variant border-opacity-20 rounded-full px-4 py-2 text-sm focus:ring-1 focus:ring-primary focus:outline-none w-48 transition-all duration-300" placeholder="Search..." type="text"/>
+<span class="material-symbols-outlined absolute right-3 text-secondary text-lg">search</span>
+</div>
+<button class="bg-primary text-on-primary px-6 py-2.5 rounded-md font-bold tracking-tight hover:-translate-y-1 hover:shadow-xl hover:shadow-primary/40 active:scale-95 transition-all btn-shine-effect">
+                    <span>BOOK APPOINTMENT</span>
+                </button>
+</div>
+</div>
+</nav>
+<!-- Main Content Canvas -->
+<main class="pt-32 min-h-screen flex flex-col items-center">
+<!-- Hero Section -->
+<section class="hero-shell container mx-auto px-6 pt-12 text-center flex flex-col items-center relative">
+<h1 class="font-headline font-black text-primary text-[5rem] md:text-[8rem] lg:text-[10rem] text-wall max-w-6xl mx-auto leading-[0.85] mb-12">
+                LET'S BEGIN THE FAST RECOVERY JOURNEY TOGETHER
+            </h1>
+<!-- Hero Building Image -->
+<div class="relative w-full max-w-5xl mt-8">
+<div class="absolute -top-12 -left-12 w-32 h-32 bg-primary-container rounded-full opacity-10 blur-3xl"></div>
+<div class="absolute -bottom-12 -right-12 w-48 h-48 bg-tertiary-container rounded-full opacity-10 blur-3xl"></div>
+<div class="hero-image-wrap relative z-10 overflow-hidden rounded-xl shadow-2xl" id = hospitalexterior>
+<img alt="Clinical Centre Exterior" class="w-full object-cover h-[500px]" data-alt="A high-quality, professional photograph of a modern, high-end healthcare facility or luxury rehabilitation center exterior with contemporary glass architecture." src="hospital-exterior.jpg"/>
+</div>
+<!-- Floating Detail Badge -->
+<div class="floating-badge absolute bottom-10 left-10 z-20 bg-surface-container-lowest p-6 rounded-lg shadow-xl max-w-xs text-left hidden md:block">
+<div class="text-primary font-black text-4xl mb-1">15+</div>
+<div class="text-on-surface font-bold text-sm tracking-tight">SPECIALIZED REHABILITATION CENTRES ACROSS THE REGION</div>
+</div>
+</div>
+</section>
+<!-- Signature Stat Section (Asymmetric Editorial Style) -->
+<section class="w-full py-32 px-12 grid grid-cols-1 md:grid-cols-3 gap-16 items-end">
+<div class="col-span-1 reveal">
+<span class="text-primary font-bold label-md block mb-4">OUR EXPERTISE</span>
+<p class="text-secondary font-medium text-lg leading-relaxed">
+                    We combine clinical precision with compassionate care to ensure your journey back to health is fast, effective, and sustainable. Our editorial approach to healthcare puts data and human experience at the center of everything we do.
+                </p>
+</div>
+<div class="col-span-2 flex justify-between items-baseline gap-12 overflow-hidden">
+<div class="stat-card reveal flex flex-col">
+<span class="text-[8rem] font-headline font-black text-primary leading-none" data-counter="98" data-suffix="%">98%</span>
+<span class="text-on-surface font-bold text-xl uppercase tracking-widest mt-2">Recovery Rate</span>
+</div>
+<div class="stat-card reveal flex flex-col translate-y-12">
+<span class="text-[6rem] font-headline font-black text-outline leading-none" data-counter="500" data-suffix="+">500+</span>
+<span class="text-on-surface font-bold text-xl uppercase tracking-widest mt-2">Specialists</span>
+</div>
+</div>
+</section>
+</main>
+<!-- Social Media Anchor (Bottom Right) -->
+<div class="social-float fixed bottom-12 right-12 flex flex-col gap-6 z-40">
+<a class="w-12 h-12 bg-surface-container-lowest rounded-full flex items-center justify-center shadow-lg hover:bg-primary hover:text-white transition-all" href="#">
+<span class="material-symbols-outlined">share</span>
+</a>
+<a class="w-12 h-12 bg-surface-container-lowest rounded-full flex items-center justify-center shadow-lg hover:bg-primary hover:text-white transition-all" href="#">
+<span class="material-symbols-outlined">public</span>
+</a>
+<a class="w-12 h-12 bg-surface-container-lowest rounded-full flex items-center justify-center shadow-lg hover:bg-primary hover:text-white transition-all" href="#">
+<span class="material-symbols-outlined">group</span>
+</a>
+</div>
+<!-- Footer -->
+<footer class="w-full py-12 px-12 bg-[#dddad2] dark:bg-[#1c1c17] flex flex-col md:flex-row justify-between items-center gap-8 border-t border-outline-variant border-opacity-10">
+<div class="flex flex-col gap-2">
+<span class="text-lg font-bold text-[#5e5e5e] font-headline">Clinical Editorial Healthcare</span>
+<span class="text-sm font-['Inter'] text-[#5e5e5e]">© 2024 Clinical Editorial Healthcare. All rights reserved.</span>
+</div>
+<div class="flex gap-8">
+<a class="text-sm font-['Inter'] text-[#5e5e5e] hover:text-[#a70008] transition-all" href="#">Privacy Policy</a>
+<a class="text-sm font-['Inter'] text-[#5e5e5e] hover:text-[#a70008] transition-all" href="#">Terms of Service</a>
+<a class="text-sm font-['Inter'] text-[#5e5e5e] hover:text-[#a70008] transition-all" href="#">Accessibility</a>
+<a class="text-sm font-['Inter'] text-[#5e5e5e] hover:text-[#a70008] transition-all" href="#">Contact Us</a>
+</div>
+</footer>
+<script>
+        const revealElements = document.querySelectorAll('.reveal');
+        const counterElements = document.querySelectorAll('[data-counter]');
+
+        const animateCounter = (element) => {
+            if (element.dataset.animated === 'true') {
+                return;
+            }
+
+            element.dataset.animated = 'true';
+
+            const target = Number(element.dataset.counter || 0);
+            const suffix = element.dataset.suffix || '';
+            const duration = 1800;
+            const startTime = performance.now();
+
+            const tick = (now) => {
+                const progress = Math.min((now - startTime) / duration, 1);
+                const eased = 1 - Math.pow(1 - progress, 3);
+                const value = Math.round(target * eased);
+
+                element.textContent = `${value}${suffix}`;
+
+                if (progress < 1) {
+                    requestAnimationFrame(tick);
+                }
+            };
+
+            requestAnimationFrame(tick);
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
+                if (!entry.isIntersecting) {
+                    return;
+                }
+
+                entry.target.classList.add('is-visible');
+
+                const counter = entry.target.querySelector('[data-counter]');
+                if (counter) {
+                    animateCounter(counter);
+                }
+
+                if (entry.target.matches('[data-counter]')) {
+                    animateCounter(entry.target);
+                }
+
+                observer.unobserve(entry.target);
+            });
+        }, {
+            threshold: 0.25
+        });
+
+        revealElements.forEach((element) => observer.observe(element));
+        counterElements.forEach((element) => observer.observe(element));
+
+        const heroImage = document.querySelector('#hospitalexterior');
+        window.addEventListener('mousemove', (event) => {
+            if (!heroImage || window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                return;
+            }
+
+            const xOffset = (event.clientX / window.innerWidth - 0.5) * 10;
+            const yOffset = (event.clientY / window.innerHeight - 0.5) * 6;
+            heroImage.style.transform = `translate3d(${xOffset}px, ${yOffset}px, 0) scale(1.01)`;
+        });
+
+        window.addEventListener('mouseleave', () => {
+            if (!heroImage) {
+                return;
+            }
+
+            heroImage.style.transform = '';
+        });
+    </script>
+</body></html>
