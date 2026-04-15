@@ -427,17 +427,58 @@
 </section>
 </main>
 <!-- Social Media Anchor (Bottom Right) -->
-<div class="social-float fixed bottom-12 right-12 flex flex-col gap-6 z-40">
+<div class="social-float fixed bottom-[110px] right-10 flex flex-col gap-6 z-40">
 <a class="w-12 h-12 bg-surface-container-lowest rounded-full flex items-center justify-center shadow-lg hover:bg-primary hover:text-white transition-all" href="#">
 <span class="material-symbols-outlined">share</span>
 </a>
 <a class="w-12 h-12 bg-surface-container-lowest rounded-full flex items-center justify-center shadow-lg hover:bg-primary hover:text-white transition-all" href="#">
 <span class="material-symbols-outlined">public</span>
 </a>
-<a class="w-12 h-12 bg-surface-container-lowest rounded-full flex items-center justify-center shadow-lg hover:bg-primary hover:text-white transition-all" href="#">
-<span class="material-symbols-outlined">group</span>
-</a>
 </div>
+<!-- Chatbot Container -->
+<div id="chatbot-container" class="fixed bottom-8 right-8 z-[60] flex flex-col items-end">
+    <!-- Chat Window -->
+    <div id="chatbot-window" class="hidden w-80 md:w-96 bg-white rounded-2xl shadow-[0_8px_30px_rgb(0,0,0,0.12)] border border-gray-100 flex flex-col overflow-hidden mb-4 transition-all duration-300 transform scale-95 opacity-0 origin-bottom-right">
+        <!-- Header -->
+        <div class="bg-primary text-white p-4 font-headline flex justify-between items-center shadow-sm z-10 relative">
+            <div class="flex items-center gap-2">
+                <span class="material-symbols-outlined text-2xl">smart_toy</span>
+                <div class="flex flex-col">
+                    <span class="font-bold text-[16px] leading-tight">AI Assistant</span>
+                    <span class="text-[10px] text-white/80 uppercase tracking-widest mt-0.5">Online</span>
+                </div>
+            </div>
+            <button id="chatbot-close" class="hover:text-gray-200 transition-colors rounded-full w-8 h-8 flex items-center justify-center hover:bg-white/10">
+                <span class="material-symbols-outlined text-xl">close</span>
+            </button>
+        </div>
+        <!-- Messages Area -->
+        <div id="chatbot-messages" class="flex-1 p-5 h-[350px] overflow-y-auto space-y-4 bg-[#fcf9f1] font-body flex flex-col custom-scrollbar relative">
+            <div class="absolute inset-0 bg-[radial-gradient(#e5e2da_1px,transparent_1px)] [background-size:16px_16px] opacity-30 pointer-events-none"></div>
+            <!-- Messages will be injected here -->
+        </div>
+        <!-- Input Area -->
+        <div class="p-4 border-t border-gray-100 bg-white flex gap-3 items-center z-10 relative shadow-[0_-4px_10px_rgb(0,0,0,0.02)]">
+            <input type="text" id="chatbot-input" class="w-full text-sm rounded-full border border-gray-200 focus:border-primary focus:ring-1 focus:ring-primary py-3 px-5 shadow-inner outline-none transition-all placeholder:text-gray-400 text-gray-800" placeholder="Type your message..." autocomplete="off">
+            <button id="chatbot-send" class="bg-primary hover:bg-[#850006] text-white w-12 h-12 rounded-full flex items-center justify-center transition-all shadow-md active:scale-95 shrink-0 group">
+                <span class="material-symbols-outlined text-lg transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5">send</span>
+            </button>
+        </div>
+    </div>
+    
+    <!-- Chat Icon / Toggle Button -->
+    <div class="relative group">
+        <div class="absolute -top-16 right-0 bg-white text-primary text-[14px] font-bold px-5 py-3 rounded-xl shadow-[0_4px_20px_-4px_rgba(167,0,8,0.25)] border border-primary/10 whitespace-nowrap group-hover:-translate-y-1 transition-all duration-300 hidden md:block animate-bounce font-headline" id="chatbot-tooltip">
+            Have a question? Please click me!
+            <!-- small triangle pointer -->
+            <div class="absolute -bottom-2 right-6 w-4 h-4 bg-white transform rotate-45 border-b border-r border-primary/10 shadow-[2px_2px_4px_rgba(0,0,0,0.05)]"></div>
+        </div>
+        <button id="chatbot-toggle" class="w-16 h-16 bg-primary hover:bg-[#850006] text-white rounded-full flex items-center justify-center shadow-2xl hover:shadow-[0_8px_25px_rgba(167,0,8,0.4)] transition-all duration-300 hover:scale-105 active:scale-95 border-[3px] border-white/90">
+            <span class="material-symbols-outlined text-[32px] transition-transform hover:rotate-12">chat</span>
+        </button>
+    </div>
+</div>
+
 <!-- Footer -->
 <footer class="w-full py-12 px-12 bg-[#dddad2] dark:bg-[#1c1c17] flex flex-col md:flex-row justify-between items-center gap-8 border-t border-outline-variant border-opacity-10">
 <div class="flex flex-col gap-2">
@@ -526,5 +567,129 @@
 
             heroImage.style.transform = '';
         });
+
+        // Chatbot Logic
+        const chatbotWindow = document.getElementById('chatbot-window');
+        const chatbotToggle = document.getElementById('chatbot-toggle');
+        const chatbotClose = document.getElementById('chatbot-close');
+        const chatbotTooltip = document.getElementById('chatbot-tooltip');
+        const chatbotMessages = document.getElementById('chatbot-messages');
+        const chatbotInput = document.getElementById('chatbot-input');
+        const chatbotSend = document.getElementById('chatbot-send');
+
+        let chatState = 0; // 0: closed, 1: ask name, 2: ask number, 3: ask problem
+        let userName = '';
+        let userNumber = '';
+
+        function toggleChatbot() {
+            if (chatbotWindow.classList.contains('hidden')) {
+                chatbotWindow.classList.remove('hidden');
+                setTimeout(() => chatbotWindow.classList.remove('scale-95', 'opacity-0'), 10);
+                if (chatState === 0) {
+                    setTimeout(() => {
+                        addBotMessage("Hi there! Please tell me your name.");
+                        chatState = 1;
+                    }, 300);
+                }
+                if (chatbotTooltip) {
+                    chatbotTooltip.style.display = 'none';
+                }
+            } else {
+                chatbotWindow.classList.add('scale-95', 'opacity-0');
+                setTimeout(() => chatbotWindow.classList.add('hidden'), 300);
+            }
+        }
+
+        chatbotToggle.addEventListener('click', toggleChatbot);
+        chatbotClose.addEventListener('click', toggleChatbot);
+
+        function handleUserInput() {
+            let text = chatbotInput.value.trim();
+            if(!text) return;
+            
+            addUserMessage(text);
+            chatbotInput.value = '';
+
+            // Simulate parsing and typing
+            const typingIndicator = addTypingIndicator();
+
+            setTimeout(() => {
+                typingIndicator.remove();
+                if (chatState === 1) {
+                    userName = text;
+                    addBotMessage(`Hi ${userName}! Please provide your 10-digit contact number.`);
+                    chatState = 2;
+                } else if (chatState === 2) {
+                    const phoneRegex = /^[5-9]\d{9}$/;
+                    let sanitizedNum = text.replace(/[^0-9]/g, '');
+                    if (phoneRegex.test(text.replace(/\s+/g,'')) || phoneRegex.test(sanitizedNum)) {
+                        userNumber = text;
+                        addBotMessage(`Thank you! Please tell me your problem.`);
+                        chatState = 3;
+                    } else {
+                        addBotMessage("⚠️ Warning: Invalid number. Please enter a valid 10-digit number starting with 5, 6, 7, 8, or 9.");
+                    }
+                } else if (chatState === 3) {
+                    const problem = text.toLowerCase();
+                    const emergencyKeywords = ["emergency", "severe", "blood", "heart", "critical", "doctor", "pain", "accident", "urgent", "serious", "hurt", "human", "help"];
+                    let needsHuman = emergencyKeywords.some(keyword => problem.includes(keyword));
+                    
+                    if (needsHuman) {
+                        addBotMessage("It sounds like you need human interaction or immediate assistance. Please contact our support team directly at +91-1800-123-4567.");
+                    } else {
+                        addBotMessage("Thank you for sharing. Based on your symptoms, we suggest resting and booking a consultation session with our specialists who can provide an adequate solution and guide you further.");
+                    }
+                }
+            }, 800);
+        }
+
+        chatbotSend.addEventListener('click', handleUserInput);
+        chatbotInput.addEventListener('keypress', function (e) {
+            if (e.key === 'Enter') handleUserInput();
+        });
+
+        function addBotMessage(message) {
+            const msgDiv = document.createElement('div');
+            msgDiv.className = 'bg-white text-on-surface p-3.5 rounded-2xl rounded-tl-sm self-start max-w-[85%] border border-gray-100 animate-fade-in text-[14px] shadow-[0_2px_8px_rgba(0,0,0,0.04)] relative z-10';
+            msgDiv.innerHTML = message;
+            chatbotMessages.appendChild(msgDiv);
+            scrollToBottom();
+        }
+
+        function addUserMessage(message) {
+            const msgDiv = document.createElement('div');
+            msgDiv.className = 'bg-primary text-white p-3.5 rounded-2xl rounded-tr-sm self-end max-w-[85%] animate-fade-in text-[14px] shadow-[0_2px_8px_rgba(167,0,8,0.2)] relative z-10';
+            msgDiv.textContent = message;
+            chatbotMessages.appendChild(msgDiv);
+            scrollToBottom();
+        }
+
+        function addTypingIndicator() {
+            const msgDiv = document.createElement('div');
+            msgDiv.className = 'bg-white text-on-surface p-3.5 rounded-2xl rounded-tl-sm self-start w-16 border border-gray-100 animate-fade-in shadow-[0_2px_8px_rgba(0,0,0,0.04)] relative z-10 flex items-center justify-center gap-1 h-[46px]';
+            msgDiv.innerHTML = `
+                <div class="w-1.5 h-1.5 bg-gray-400 rounded-full animate-bounce [animation-delay:-0.3s]"></div>
+                <div class="w-1.5 h-1.5 bg-gray-400 rounded-full animate-bounce [animation-delay:-0.15s]"></div>
+                <div class="w-1.5 h-1.5 bg-gray-400 rounded-full animate-bounce"></div>
+            `;
+            chatbotMessages.appendChild(msgDiv);
+            scrollToBottom();
+            return msgDiv;
+        }
+
+        function scrollToBottom() {
+            chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
+        }
+
+        const chatStyle = document.createElement('style');
+        chatStyle.innerHTML = `
+            @keyframes fadeInMsg { from { opacity: 0; transform: translateY(10px) scale(0.98); } to { opacity: 1; transform: translateY(0) scale(1); } }
+            .animate-fade-in { animation: fadeInMsg 0.35s cubic-bezier(0.22, 1, 0.36, 1) forwards; }
+            .custom-scrollbar::-webkit-scrollbar { width: 5px; }
+            .custom-scrollbar::-webkit-scrollbar-track { background: transparent; }
+            .custom-scrollbar::-webkit-scrollbar-thumb { background-color: #d1d5db; border-radius: 10px; }
+            .custom-scrollbar::-webkit-scrollbar-thumb:hover { background-color: #9ca3af; }
+        `;
+        document.head.appendChild(chatStyle);
     </script>
 </body></html>
